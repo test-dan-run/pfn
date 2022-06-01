@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+
+  local:
+    stdin_open: true
+    tty: true
+    image: pfn:v0.0.1
+    runtime: nvidia
+    environment:
+      NVIDIA_VISIBLE_DEVICES: 0
+    volumes:
+      - /home/daniel/projects/PFN:/workspace:z
+      - /home/daniel/datasets/PFN:/datasets:z
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    shm_size: 16gb
+  #   command: python3 local_train.py
+
+  # tensorboard:
+  #   stdin_open: true
+  #   tty: true
+  #   image: compact_lid:v0.1.3
+  #   ports:
+  #     - 6006:6006
+  #   volumes:
+  #     - /home/daniel/projects/compact_lid/logs:/logs
+  #   command: tensorboard --logdir /logs --host 0.0.0.0 --port 6006
